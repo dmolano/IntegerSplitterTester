@@ -1,19 +1,23 @@
-/*
-This program is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 3 of the License, or
-	(at your option) any later version.
-
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-
-	You should have received a copy of the GNU General Public License
-	along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
-// IntegerSplitterTester.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
-//
+/***************************************************************************/
+/*  This program is free software: you can redistribute it and/or modify   */
+/*	it under the terms of the GNU General Public License as published by   */
+/*	the Free Software Foundation, either version 3 of the License, or      */
+/*	(at your option) any later version.                                    */
+/*                                                                         */
+/*	This program is distributed in the hope that it will be useful,        */
+/*	but WITHOUT ANY WARRANTY; without even the implied warranty of         */
+/*	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the          */
+/*	GNU General Public License for more details.                           */
+/*                                                                         */
+/*	You should have received a copy of the GNU General Public License      */
+/*	along with this program.  If not, see <https://www.gnu.org/licenses/>. */
+/*                                                                         */
+/*                                                                         */
+/*  Author: Dionisio Molano Robledo                                        */
+/*  Date: 2019/10/01                                                       */
+/*  Email: dmolano.smriti@gmail.com                                        */
+/*                                                                         */
+/***************************************************************************/
 
 #include <iostream>
 
@@ -27,11 +31,14 @@ This program is free software: you can redistribute it and/or modify
 #define BASE_10 10
 #define LAST_SEPARATOR 0
 
-typedef struct IntegerSplit { //es el nombre de la estructura
+//
+// IntegerSplit
+// 
+typedef struct IntegerSplit { //name of the structure
 	int integer;
 	int separator;
 	struct IntegerSplit* next;
-}IntegerSplitType;//es el tipo de dato para declarar la estructura
+}IntegerSplitType;// type of data to declare the structure
 
 typedef IntegerSplitType* IntegerSplitPtr;
 
@@ -134,7 +141,7 @@ IntegerSplitPtr integerSplitter_Split(const char* string) {
 			memset(digits, 0, MAX_DIGITS_LENGTH);
 			digitsIndex = 0;
 			if (isdigit(character)) {
-				// Almaceno el número, si puedo hacerlo.
+				// store the number, if you can do it.
 				state = integerSplitter_AddDigit(&digitsIndex, digits, character);
 			}
 			else if (!(iswalnum(character) || iswspace(character))) {
@@ -146,7 +153,7 @@ IntegerSplitPtr integerSplitter_Split(const char* string) {
 			break;
 		case SEPARATOR_STATE_SPLITTER:
 			if (isdigit(character)) {
-				// Almaceno el número, si puedo hacerlo.
+				// store the number, if you can do it.
 				state = integerSplitter_AddDigit(&digitsIndex, digits, character);
 			}
 			else if (!(iswalnum(character) || iswspace(character))) {
@@ -158,7 +165,7 @@ IntegerSplitPtr integerSplitter_Split(const char* string) {
 			break;
 		case DIGIT_STATE_SPLITTER:
 			if (isdigit(character)) {
-				// Almaceno el número, si puedo hacerlo.
+				// store the number, if you can do it.
 				state = integerSplitter_AddDigit(&digitsIndex, digits, character);
 			}
 			else if (!(iswalnum(character) || iswspace(character))) {
@@ -182,6 +189,9 @@ IntegerSplitPtr integerSplitter_Split(const char* string) {
 	return integerSplitList;
 }
 
+//
+// test
+//
 void test(const char* string) {
 	IntegerSplitPtr integerSplitList = INTEGER_SPLITTER_NULL;
 	std::cout << "Hello World!\n";
@@ -213,6 +223,9 @@ void test(const char* string) {
 	}
 }
 
+//
+// main
+//
 int main()
 {
 	test("");
@@ -225,13 +238,3 @@ int main()
 	test(" ");
 	test("1;2;3;04");
 }
-
-// Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar
-// Depurar programa: F5 o menú Depurar > Iniciar depuración
-
-// Sugerencias para primeros pasos: 1. Use la ventana del Explorador de soluciones para agregar y administrar archivos
-//   2. Use la ventana de Team Explorer para conectar con el control de código fuente
-//   3. Use la ventana de salida para ver la salida de compilación y otros mensajes
-//   4. Use la ventana Lista de errores para ver los errores
-//   5. Vaya a Proyecto > Agregar nuevo elemento para crear nuevos archivos de código, o a Proyecto > Agregar elemento existente para agregar archivos de código existentes al proyecto
-//   6. En el futuro, para volver a abrir este proyecto, vaya a Archivo > Abrir > Proyecto y seleccione el archivo .sln
